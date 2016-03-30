@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SimulatorView extends JFrame {
+public class SimulatorView extends JFrame { 
     private CarParkView carParkView;
     private JPanel controller;
     private JButton eenButton;
@@ -14,7 +14,7 @@ public class SimulatorView extends JFrame {
     private Car[][][] cars;
 
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
-        this.numberOfFloors = numberOfFloors;
+    	this.numberOfFloors = numberOfFloors;
         this.numberOfRows = numberOfRows;
         this.numberOfPlaces = numberOfPlaces;
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];

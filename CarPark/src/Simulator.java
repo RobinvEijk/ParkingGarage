@@ -26,8 +26,16 @@ public class Simulator {
         exitCarQueue = new CarQueue();
         simulatorView = new SimulatorView(3, 6, 30);
     }
-
-    public void run(int getal) {
+    //oude run method
+    public void run(){
+    	for (int i = 0;i < 10000; i++){
+    		tick();
+    	}
+    }
+    
+    //nieuwe run method.
+    //moet aangestuur worden door de buttons.
+    public void run2(int getal) {
     	int i = getal;
     	while(i > 0){
     		tick();
@@ -131,6 +139,7 @@ public class Simulator {
         public static void main(String[] args)
         {
         	Simulator sim = new Simulator();
+        	sim.run();
         }
     }
 
