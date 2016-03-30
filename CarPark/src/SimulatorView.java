@@ -1,8 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class SimulatorView extends JFrame {
     private CarParkView carParkView;
+    private JPanel controller;
+    private JButton eenButton;
+    private JButton honderdButton;
     private int numberOfFloors;
     private int numberOfRows;
     private int numberOfPlaces;
@@ -15,9 +20,24 @@ public class SimulatorView extends JFrame {
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         
         carParkView = new CarParkView();
-
+        controller = new JPanel();
+        controller.setLayout(new GridLayout(0, 1));
+        
+        eenButton = new JButton("1 step");
+        eenButton.addActionListener(new ActionListener(){
+        	public void actionPerformed(ActionEvent e){};
+        });
+        controller.add(eenButton);
+        
+        honderdButton = new JButton("100 steps");
+        honderdButton.addActionListener(new ActionListener(){
+        	public void actionPerformed(ActionEvent e){};
+        });
+        controller.add(honderdButton);
+        
         Container contentPane = getContentPane();
         //contentPane.add(stepLabel, BorderLayout.NORTH);
+        contentPane.add(controller, BorderLayout.WEST);
         contentPane.add(carParkView, BorderLayout.CENTER);
         //contentPane.add(population, BorderLayout.SOUTH);
         pack();
@@ -25,9 +45,24 @@ public class SimulatorView extends JFrame {
 
         updateView();
     }
+    
+    public void actionPerformed(ActionEvent e) {
+		if (e.getSource()==eenButton) {
+			//task
+		}
+		
+		if (e.getSource()==honderdButton) {
+			//task
+		}
+	}
+
 
     public void updateView() {
         carParkView.updateView();
+    }
+    
+    public void setController(){
+    	
     }
     
      public int getNumberOfFloors() {
@@ -127,6 +162,8 @@ public class SimulatorView extends JFrame {
             }
             return true;
         }
+
+    
     
     private class CarParkView extends JPanel {
         
