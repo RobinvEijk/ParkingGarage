@@ -1,7 +1,9 @@
 import java.util.Random;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Simulator {
-
+public class Simulator implements ActionListener
+{
     private CarQueue entranceCarQueue;
     private CarQueue paymentCarQueue;
     private CarQueue exitCarQueue;
@@ -24,7 +26,7 @@ public class Simulator {
         entranceCarQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
-        simulatorView = new SimulatorView(3, 6, 30);
+        simulatorView = new SimulatorView(3, 6, 30, this);
     }
     //oude run method
     public void run(){
@@ -33,9 +35,23 @@ public class Simulator {
     	}
     }
     
+    public void actionPerformed(ActionEvent e){
+    	String command = e.getActionCommand();
+    	if (command == "100 steps")
+    	{
+    		for (int i = 0; i < 100; i++){
+    			run(1);
+    		}
+    	}
+    	if (command == "1 step")
+    	{
+    		run(1);
+    	}
+    }
+    
     //nieuwe run method.
     //moet aangestuur worden door de buttons.
-    public void run2(int getal) {
+    public void run(int getal) {
     	int i = getal;
     	while(i > 0){
     		tick();
@@ -100,8 +116,19 @@ public class Simulator {
             if (car == null) {
                 break;
             }
+            if (car.getClass().equals(AdHocCar.class)){
             car.setIsPaying(true);
             paymentCarQueue.addCar(car);
+            }
+            
+            //Volgens robin de betaalmethode voor de passhouders. namelijk gewoon doorrijden
+            else if (car.getClass().equals(PassHolderCar.class)){
+            car.setIsPaying(false);
+            simulatorView.removeCarAt(car.getLocation());
+            exitCarQueue.addCar(car);
+            }
+            
+            
         }
 
         // Let cars pay.
@@ -139,7 +166,7 @@ public class Simulator {
         public static void main(String[] args)
         {
         	Simulator sim = new Simulator();
-        	sim.run();
+        	sim.run(10);
         }
     }
 

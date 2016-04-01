@@ -13,7 +13,7 @@ public class SimulatorView extends JFrame {
     private int numberOfPlaces;
     private Car[][][] cars;
 
-    public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
+    public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces, Simulator simulator) {
     	this.numberOfFloors = numberOfFloors;
         this.numberOfRows = numberOfRows;
         this.numberOfPlaces = numberOfPlaces;
@@ -24,15 +24,11 @@ public class SimulatorView extends JFrame {
         controller.setLayout(new GridLayout(0, 1));
         
         eenButton = new JButton("1 step");
-        eenButton.addActionListener(new ActionListener(){
-        	public void actionPerformed(ActionEvent e){};
-        });
+        eenButton.addActionListener(simulator);
         controller.add(eenButton);
         
         honderdButton = new JButton("100 steps");
-        honderdButton.addActionListener(new ActionListener(){
-        	public void actionPerformed(ActionEvent e){};
-        });
+        honderdButton.addActionListener(simulator);
         controller.add(honderdButton);
         
         Container contentPane = getContentPane();
@@ -46,16 +42,7 @@ public class SimulatorView extends JFrame {
         updateView();
     }
     
-    public void actionPerformed(ActionEvent e) {
-		if (e.getSource()==eenButton) {
-			//task
-		}
-		
-		if (e.getSource()==honderdButton) {
-			//task
-		}
-	}
-
+   
 
     public void updateView() {
         carParkView.updateView();
