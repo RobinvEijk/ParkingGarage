@@ -2,7 +2,8 @@ import java.util.Random;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Simulator implements ActionListener
+public class Simulator extends AbstractModel
+	implements ActionListener
 {
     private CarQueue entranceCarQueue;
     private CarQueue paymentCarQueue;
@@ -91,7 +92,7 @@ public class Simulator implements ActionListener
     
    
 
-    private void tick() {
+    public void tick() {
         // Advance the time by one minute.
         minute++;
         while (minute > 59) {
