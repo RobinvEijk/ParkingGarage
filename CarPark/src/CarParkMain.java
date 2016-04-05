@@ -1,3 +1,5 @@
+import java.awt.BorderLayout;
+
 import javax.swing.*;
 
 public class CarParkMain {
@@ -14,13 +16,10 @@ public class CarParkMain {
 		
 		
 		screen=new JFrame("Parking Garage Simulator");
-		screen.setSize(540, 285);
+		screen.setSize(900,600);
 		screen.setResizable(false);
-		screen.setLayout(null);
-		screen.getContentPane().add(simulatorView);
-		screen.getContentPane().add(controller);
-	    simulatorView.setBounds(10, 10, 200, 200);
-		controller.setBounds(0, 210, 450, 50);
+		screen.getContentPane().add(simulatorView, BorderLayout.CENTER);
+		screen.getContentPane().add(controller, BorderLayout.WEST);
 		screen.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		screen.setVisible(true);
 		
@@ -28,7 +27,7 @@ public class CarParkMain {
 	
 	 public static void main(String[] args)
      {
-     	CarParkMain CarPark = new CarParkMain();
+     	CarParkMain carPark = new CarParkMain();
      	
      }
 }

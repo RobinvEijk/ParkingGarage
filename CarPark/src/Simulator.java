@@ -2,14 +2,11 @@ import java.util.Random;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Simulator extends AbstractModel
-	implements ActionListener
-{
+public class Simulator extends AbstractModel {
     private CarQueue entranceCarQueue;
     private CarQueue paymentCarQueue;
     private CarQueue exitCarQueue;
-    private SimulatorView simulatorView;
-    private ActionEvent event; 
+    private SimulatorView simulatorView; 
 
     private int day = 0;
     private int hour = 0;
@@ -30,64 +27,7 @@ public class Simulator extends AbstractModel
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
         simulatorView = new SimulatorView(3, 6, 30, this);
-        event = null;
     }
-    
-    //old run method, 
-    //performs 10000 steps
-    public void run(){
-    	for (int i = 0;i < 10000; i++){
-    		tick();
-    	}
-    }
-    
-    //new run method
-    //@param the amount of steps the simulator should perform
-    public void runSteps(int getal) {
-    	int i = getal;
-    	while(i > 0){
-    		tick();
-    		i--; }
-    	}
-    //sets the ActionEvent
-    //@param the recieved action event
-    public void setActionEvent(ActionEvent e) {
-    	event = e;
-    }
-    
-    //returns the actionEvent
-    public ActionEvent getActionEvent() {
-    	return event;
-    }
-    
-    
-    //Performs the required action
-    //@param the used ActionEvent
-    //creates a new thread so the program keeps responding while executing the steps. 
-    public void actionPerformed(ActionEvent e)
-    {
-    	// sets the received actionEvent, and creates a new thread.
-    	setActionEvent(e);
-    	Thread performerThread = new Thread(){
-    		
-    	
-    		
-    		public void run(){
-    			ActionEvent e = getActionEvent();
-    			String command = e.getActionCommand();
-    		
-    			if (command == "100 steps"){
-    				runSteps(100);
-    			}
-    			if (command == "1 step"){
-    				runSteps(1);
-    			}
-    			
-    		}
-    	};
-    	performerThread.start();
-    }
-    
     
     
    
@@ -194,12 +134,4 @@ public class Simulator extends AbstractModel
             e.printStackTrace();
         }
     }
-
-
-        public static void main(String[] args)
-        {
-        	Simulator sim = new Simulator();
-        	
-        }
-    	}
-
+}

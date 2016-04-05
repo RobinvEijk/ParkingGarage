@@ -9,45 +9,55 @@ public class Controller extends AbstractController implements ActionListener {
 	private JButton hundredSteps;
 	private ActionEvent event;
     
+	/**
+     * Creates a new Controller for the steps
+     * Adds 2 buttons to the terminal. 
+     * @param simulator
+     */
 	public Controller(Simulator simulator) {
 		super(simulator);
-		setSize(450, 50);
+		setSize(90, 130);
 		oneStep=new JButton("One step");
 		oneStep.addActionListener(this);
 		hundredSteps=new JButton("Hundred Steps");
 		hundredSteps.addActionListener(this);
 		
-		
 		this.setLayout(new GridLayout(0, 1));
 		add(oneStep);
 		add(hundredSteps);
-		
 		setVisible(true);
 	}
 	
-	//new run method
-    //@param the amount of steps the simulator should perform
+	/**new run method
+	 * @param the amount of steps the simulator should perform
+     */
     public void runSteps(int getal) {
     	int i = getal;
     	while(i > 0){
     		simulator.tick();
     		i--; }
     	}
-    //sets the ActionEvent
-    //@param the recieved action event
+    
+    /**sets the current ActionEvent
+    *@param the recieved action event
+    */
     public void setActionEvent(ActionEvent e) {
     	event = e;
     }
     
-    //returns the actionEvent
+    /**
+     * returns the current actionevent
+     * @return event
+     */
     public ActionEvent getActionEvent() {
     	return event;
     }
     
     
-    //Performs the required action
-    //@param the used ActionEvent
-    //creates a new thread so the program keeps responding while executing the steps. 
+    /**Performs the required action
+    *@param the used ActionEvent
+    *creates a new thread so the program keeps responding while executing the steps.
+    */ 
     public void actionPerformed(ActionEvent e)
     {
     	// sets the received actionEvent, and creates a new thread.

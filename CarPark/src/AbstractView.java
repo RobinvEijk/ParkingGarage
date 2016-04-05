@@ -1,6 +1,6 @@
 import javax.swing.*;
 
-public abstract class AbstractView extends JFrame {
+public abstract class AbstractView extends JPanel {
 	protected Simulator simulator;
 
 	/**
@@ -8,7 +8,7 @@ public abstract class AbstractView extends JFrame {
 	*/
 	public AbstractView(Simulator sim) {
 		this.simulator=sim;
-		
+		simulator.addView(this);
 	}
 	
 	/**

@@ -1,17 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class SimulatorView extends AbstractView { 
     private CarParkView carParkView;
-    private JPanel controller;
-    private JButton eenButton;
-    private JButton honderdButton;
     private int numberOfFloors;
     private int numberOfRows;
     private int numberOfPlaces;
     private Car[][][] cars;
+    private JButton test;
 
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces, Simulator simulator) {
     	super(simulator);
@@ -19,28 +15,16 @@ public class SimulatorView extends AbstractView {
         this.numberOfRows = numberOfRows;
         this.numberOfPlaces = numberOfPlaces;
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
-        
+       
+        test = new JButton("test"); 
         carParkView = new CarParkView();
-        controller = new JPanel();
-        controller.setLayout(new GridLayout(0, 1));
-        
-        eenButton = new JButton("1 step");
-        eenButton.addActionListener(simulator);
-        controller.add(eenButton);
-        
-        honderdButton = new JButton("100 steps");
-        honderdButton.addActionListener(simulator);
-        controller.add(honderdButton);
-        
-        Container contentPane = getContentPane();
-        //contentPane.add(stepLabel, BorderLayout.NORTH);
-        contentPane.add(controller, BorderLayout.WEST);
-        contentPane.add(carParkView, BorderLayout.CENTER);
-        //contentPane.add(population, BorderLayout.SOUTH);
-        pack();
+        this.setLayout(new BorderLayout(0,1));
+        add(carParkView, BorderLayout.NORTH);
+        add(test, BorderLayout.SOUTH);
         setVisible(true);
-
+        
         updateView();
+        
     }
     
    
