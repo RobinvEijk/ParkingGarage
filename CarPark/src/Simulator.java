@@ -8,12 +8,13 @@ public class Simulator implements ActionListener
     private CarQueue paymentCarQueue;
     private CarQueue exitCarQueue;
     private SimulatorView simulatorView;
+    private ActionEvent event; 
 
     private int day = 0;
     private int hour = 0;
     private int minute = 0;
 
-    private int tickPause = 100;
+    private int tickPause = 200;
 
     int weekDayArrivals= 50; // average number of arriving cars per hour
     int weekendArrivals = 90; // average number of arriving cars per hour
@@ -22,42 +23,73 @@ public class Simulator implements ActionListener
     int paymentSpeed = 10; // number of cars that can pay per minute
     int exitSpeed = 9; // number of cars that can leave per minute
 
+    //constructor
     public Simulator() {
         entranceCarQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
         simulatorView = new SimulatorView(3, 6, 30, this);
+        event = null;
     }
-    //oude run method
+    
+    //old run method, 
+    //performs 10000 steps
     public void run(){
     	for (int i = 0;i < 10000; i++){
     		tick();
     	}
     }
     
-    public void actionPerformed(ActionEvent e){
-    	String command = e.getActionCommand();
-    	if (command == "100 steps")
-    	{
-    		for (int i = 0; i < 100; i++){
-    			run(1);
-    		}
-    	}
-    	if (command == "1 step")
-    	{
-    		run(1);
-    	}
-    }
-    
-    //nieuwe run method.
-    //moet aangestuur worden door de buttons.
-    public void run(int getal) {
+    //new run method
+    //@param the amount of steps the simulator should perform
+    public void runSteps(int getal) {
     	int i = getal;
     	while(i > 0){
     		tick();
-    		i--; 
+    		i--; }
     	}
+    //sets the ActionEvent
+    //@param the recieved action event
+    public void setActionEvent(ActionEvent e) {
+    	event = e;
     }
+    
+    //returns the actionEvent
+    public ActionEvent getActionEvent() {
+    	return event;
+    }
+    
+    
+    //Performs the required action
+    //@param the used ActionEvent
+    //creates a new thread so the program keeps responding while executing the steps. 
+    public void actionPerformed(ActionEvent e)
+    {
+    	// sets the received actionEvent, and creates a new thread.
+    	setActionEvent(e);
+    	Thread performerThread = new Thread(){
+    		
+    	
+    		
+    		public void run(){
+    			ActionEvent e = getActionEvent();
+    			String command = e.getActionCommand();
+    		
+    			if (command == "100 steps"){
+    				runSteps(100);
+    			}
+    			if (command == "1 step"){
+    				runSteps(1);
+    			}
+    			
+    		}
+    	};
+    	performerThread.start();
+    }
+    
+    
+    
+   
 
     private void tick() {
         // Advance the time by one minute.
@@ -121,7 +153,7 @@ public class Simulator implements ActionListener
             paymentCarQueue.addCar(car);
             }
             
-            //Volgens robin de betaalmethode voor de passhouders. namelijk gewoon doorrijden
+            //New payment method for pass holders, they dont pay. they just drive out. 
             else if (car.getClass().equals(PassHolderCar.class)){
             car.setIsPaying(false);
             simulatorView.removeCarAt(car.getLocation());
@@ -166,7 +198,7 @@ public class Simulator implements ActionListener
         public static void main(String[] args)
         {
         	Simulator sim = new Simulator();
-        	sim.run(10);
+        	
         }
-    }
+    	}
 
