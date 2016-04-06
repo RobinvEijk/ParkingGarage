@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SimulatorView extends JFrame { 
+public class SimulatorView extends AbstractView { 
     private CarParkView carParkView;
     private JPanel controller;
     private JButton eenButton;
@@ -13,7 +13,7 @@ public class SimulatorView extends JFrame {
     private int numberOfPlaces;
     private Car[][][] cars;
 
-    public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces, Simulator simulator) {
+    public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces, LogicModel logicModel) {
     	this.numberOfFloors = numberOfFloors;
         this.numberOfRows = numberOfRows;
         this.numberOfPlaces = numberOfPlaces;
@@ -24,11 +24,11 @@ public class SimulatorView extends JFrame {
         controller.setLayout(new GridLayout(0, 1));
         
         eenButton = new JButton("1 step");
-        eenButton.addActionListener(simulator);
+        eenButton.addActionListener(logicModel);
         controller.add(eenButton);
         
         honderdButton = new JButton("100 steps");
-        honderdButton.addActionListener(simulator);
+        honderdButton.addActionListener(logicModel);
         controller.add(honderdButton);
         
         Container contentPane = getContentPane();
@@ -223,4 +223,5 @@ public class SimulatorView extends JFrame {
         }
     }
 
+  
 }
