@@ -1,14 +1,12 @@
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Random;
 
 public class LogicModel extends AbstractModel
-implements ActionListener
 {
 	private CarQueue entranceCarQueue;
     private CarQueue paymentCarQueue;
     private CarQueue exitCarQueue;
     private SimulatorView simulatorView;
+    private Simulator simulator;
     
 	private int day = 0;
 	private int hour = 0;
@@ -23,14 +21,14 @@ implements ActionListener
     int paymentSpeed = 10; // number of cars that can pay per minute
     int exitSpeed = 9; // number of cars that can leave per minute
     
-    private ActionEvent event; 
+    
 
 	
-	public LogicModel(){
+	public LogicModel(Simulator simulator){
 		entranceCarQueue = new CarQueue();
 	    paymentCarQueue = new CarQueue();
 	    exitCarQueue = new CarQueue();
-	    simulatorView = new SimulatorView(3, 6, 30,this);
+	    simulatorView = new SimulatorView(3, 6, 30, simulator);
 	}
 	
 	  //new run method
@@ -42,44 +40,8 @@ implements ActionListener
     		i--; }
     	}
     
-    //sets the ActionEvent
-    //@param the recieved action event
-    public void setActionEvent(ActionEvent e) {
-    	event = e;
-    }
     
-    //returns the actionEvent
-    public ActionEvent getActionEvent() {
-    	return event;
-    }
-    
-    
-    //Performs the required action
-    //@param the used ActionEvent
-    //creates a new thread so the program keeps responding while executing the steps. 
-    public void actionPerformed(ActionEvent e)
-    {
-    	// sets the received actionEvent, and creates a new thread.
-    	setActionEvent(e);
-    	Thread performerThread = new Thread(){
-    		
-    	
-    		
-    		public void run(){
-    			ActionEvent e = getActionEvent();
-    			String command = e.getActionCommand();
-    		
-    			if (command == "100 steps"){
-    				runSteps(100);
-    			}
-    			if (command == "1 step"){
-    				runSteps(1);
-    			}
-    			
-    		}
-    	};
-    	performerThread.start();
-    }
+  
 	
 	public void tick() {
         // Advance the time by one minute.
