@@ -4,6 +4,12 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+/**
+ * Class for the controller of the Simulator. 
+ * Contains the buttons for the simulator with its ActionListener and ActionEvent
+ * @author Robin
+ *
+ */
 public class Simulator extends AbstractController
 implements ActionListener
 {
@@ -12,7 +18,10 @@ implements ActionListener
 	private JButton eenButton;
     private JButton honderdButton;
 	
-
+    /**
+     * Constructs an instance of the Simulator Controller
+     * and add the buttons "1 step" an "100 steps" 
+     */
     public Simulator(){
     	logicModel = new LogicModel(this);
     	setLayout(new GridLayout(0, 1));
@@ -26,21 +35,28 @@ implements ActionListener
         add(honderdButton);
         
         setVisible(true);
-        
-        
-        
     }
     
 
+    /**
+     * Sets the from the ActionListener recieved ActionEvent to the field event
+     * @param e
+     */
     public void setActionEvent(ActionEvent e) {
     	event = e;
     }
 
-    //returns the actionEvent
+    /**
+     * returns the set event
+     * @return event
+     */
     public ActionEvent getActionEvent() {
     	return event;
     }
 
+    /**
+     * Executes the the input action
+     */
     public void actionPerformed(ActionEvent e)
     {
     	// sets the received actionEvent, and creates a new thread.
@@ -65,7 +81,9 @@ implements ActionListener
     	performerThread.start();
     }
     
-    	
+    /**
+     * Starts the simulation/ Main
+     */
     public static void main(String[] args)
     {
     	new Simulator();

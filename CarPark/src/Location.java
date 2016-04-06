@@ -1,4 +1,8 @@
-
+/**
+ * Class which specifies each location inside the car park
+ * @author Robin
+ *
+ */
 public class Location {
 
     private int floor;
@@ -6,7 +10,11 @@ public class Location {
     private int place;
 
     /**
-     * Constructor for objects of class Location
+     * Construct a new location class
+     * defines the location its floor, row and place inside this row
+     * @param floor
+     * @param row
+     * @param place
      */
     public Location(int floor, int row, int place) {
         this.floor = floor;

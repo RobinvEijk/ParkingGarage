@@ -1,5 +1,10 @@
 import java.util.Random;
 
+/**
+ * Class for the logic which implements the movements of the cars inside the carPark
+ * @author Robin
+ *
+ */
 public class LogicModel extends AbstractModel
 {
 	private CarQueue entranceCarQueue;
@@ -23,7 +28,11 @@ public class LogicModel extends AbstractModel
     
     
 
-	
+	/**
+	 * Constructs a new instance of the LogicModel
+	 * Creates a new entranceCarQueue, paymentCarQueue and exitCarQueue
+	 * @param simulator
+	 */
 	public LogicModel(Simulator simulator){
 		entranceCarQueue = new CarQueue();
 	    paymentCarQueue = new CarQueue();
@@ -31,8 +40,10 @@ public class LogicModel extends AbstractModel
 	    simulatorView = new SimulatorView(3, 6, 30, simulator);
 	}
 	
-	  //new run method
-    //@param the amount of steps the simulator should perform
+	/**
+	 * Runs the simulation for the given amount of steps
+	 * @param getal
+	 */
     public void runSteps(int getal) {
     	int i = getal;
     	while(i > 0){
@@ -42,7 +53,9 @@ public class LogicModel extends AbstractModel
     
     
   
-	
+	/**
+	 * Forwards the simulation by one step/minute
+	 */
 	public void tick() {
         // Advance the time by one minute.
         minute++;

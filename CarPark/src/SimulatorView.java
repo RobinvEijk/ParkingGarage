@@ -3,48 +3,57 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Class SimulatorView
+ * This class creates the display for the view of the parking garage
+ * 
+ * @author Robin
+ */
 public class SimulatorView extends AbstractView 
 { 
     private CarParkView carParkView;
-    
     private int numberOfFloors;
     private int numberOfRows;
     private int numberOfPlaces;
     private Car[][][] cars;
-    private Simulator simulator;
     
     
     
     
-
+    
+    /**
+     * Creates an instance of SimulatorView
+     * @param numberOfFloors
+     * @param numberOfRows
+     * @param numberOfPlaces
+     * @param simulator
+     */
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces, Simulator simulator) {
     	this.numberOfFloors = numberOfFloors;
         this.numberOfRows = numberOfRows;
         this.numberOfPlaces = numberOfPlaces;
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
-        
-        
         carParkView = new CarParkView();
-        this.simulator = simulator;
+        
         
         
        
-        
+        //Creates the contentpanel which contains al the views. 
         Container contentPane = getContentPane();
-        //contentPane.add(stepLabel, BorderLayout.NORTH);
         contentPane.add(carParkView, BorderLayout.CENTER);
-        contentPane.add(this.simulator, BorderLayout.WEST);
+        contentPane.add(simulator, BorderLayout.WEST);
         //contentPane.add(population, BorderLayout.SOUTH);
+        //contentPane.add(stepLabel, BorderLayout.NORTH);
         pack();
-        
-
         updateView();
         setVisible(true);
         
     }
    
    
-
+    /**
+     * Calls the updateview method inside carParkView
+     */
     public void updateView() {
         carParkView.updateView();
     }
@@ -53,24 +62,48 @@ public class SimulatorView extends AbstractView
     	
     }
     
+    /**
+     * returns the number of floors in the parking garage
+     * @return numberOfFloors
+     */
      public int getNumberOfFloors() {
             return numberOfFloors;
         }
-    
-        public int getNumberOfRows() {
+     
+    /**
+     * returns the number of rows at a floor
+     * @return numberOfRows
+     */
+     	public int getNumberOfRows() {
             return numberOfRows;
         }
-    
-        public int getNumberOfPlaces() {
+     	
+    /**
+     * Gets the number of places in a row
+     * @return numberOfPlaces
+     */
+     	public int getNumberOfPlaces() {
             return numberOfPlaces;
         }
-    
-        public Car getCarAt(Location location) {
+     	
+     /**
+      * Checks if there is a car at the given location
+      * @param location
+      * @return	cars
+      */
+     	public Car getCarAt(Location location) {
             if (!locationIsValid(location)) {
                 return null;
             }
             return cars[location.getFloor()][location.getRow()][location.getPlace()];
         }
+     	
+     /**
+      * Sets specified car at specified location if location is valid and empty
+      * @param location
+      * @param car
+      * @return boolean
+      */
     
         public boolean setCarAt(Location location, Car car) {
             if (!locationIsValid(location)) {
@@ -84,7 +117,11 @@ public class SimulatorView extends AbstractView
             }
             return false;
         }
-    
+    /**
+     * Removes car from specified location
+     * @param location
+     * @return car
+     */
         public Car removeCarAt(Location location) {
             if (!locationIsValid(location)) {
                 return null;
@@ -97,7 +134,11 @@ public class SimulatorView extends AbstractView
             car.setLocation(null);
             return car;
         }
-    
+        
+    /**
+     * Finds the nearest free location
+     * @return location
+     */
         public Location getFirstFreeLocation() {
             for (int floor = 0; floor < getNumberOfFloors(); floor++) {
                 for (int row = 0; row < getNumberOfRows(); row++) {
@@ -111,7 +152,11 @@ public class SimulatorView extends AbstractView
             }
             return null;
         }
-    
+       
+    /**
+     * finds the nearest leaving car
+     * @return car
+     */
         public Car getFirstLeavingCar() {
             for (int floor = 0; floor < getNumberOfFloors(); floor++) {
                 for (int row = 0; row < getNumberOfRows(); row++) {
@@ -126,7 +171,10 @@ public class SimulatorView extends AbstractView
             }
             return null;
         }
-    
+        
+    /**
+     * For each car call its tick() method
+     */
         public void tick() {
             for (int floor = 0; floor < getNumberOfFloors(); floor++) {
                 for (int row = 0; row < getNumberOfRows(); row++) {
@@ -140,7 +188,12 @@ public class SimulatorView extends AbstractView
                 }
             }
         }
-    
+        
+    /**
+     * Check if specified location exists
+     * @param location
+     * @return boolean
+     */
         private boolean locationIsValid(Location location) {
             int floor = location.getFloor();
             int row = location.getRow();
@@ -152,7 +205,11 @@ public class SimulatorView extends AbstractView
         }
 
     
-    
+    /**
+     * Creates the view of the Carpark
+     * @author Robin
+     *
+     */
     private class CarParkView extends JPanel {
         
         private Dimension size;
@@ -191,6 +248,9 @@ public class SimulatorView extends AbstractView
             }
         }
     
+        /**
+         * Updates the view of the parking garage to the current state of the garage
+         */
         public void updateView() {
             // Create a new car park image if the size has changed.
             if (!size.equals(getSize())) {
