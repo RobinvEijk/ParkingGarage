@@ -1,6 +1,6 @@
 /**
  * Class which specifies each location inside the car park
- * @author Robin
+ * @author Robin van Eijk, Johan Zandstra, Debbie Smith en Dirk de Haan
  *
  */
 public class Location {

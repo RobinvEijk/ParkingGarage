@@ -3,7 +3,7 @@ import java.util.Queue;
 
 /**
  * Class for the queue's of cars
- * @author Robin
+ * @author Johan Zandstra, Robin van Eijk, Dirk de Haan en Debbie Smith
  *
  */
 public class CarQueue {

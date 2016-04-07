@@ -2,7 +2,7 @@ import java.util.Random;
 
 /**
  * Class for the logic which implements the movements of the cars inside the carPark
- * @author Robin
+ * @author Debbie Smith, Robin van Eijk, Johan Zandstra en Dirk de Haan
  *
  */
 public class LogicModel extends AbstractModel

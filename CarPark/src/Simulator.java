@@ -7,7 +7,7 @@ import javax.swing.JButton;
 /**
  * Class for the controller of the Simulator. 
  * Contains the buttons for the simulator with its ActionListener and ActionEvent
- * @author Robin
+ * @author Dirk de Haan, Robin van Eijk, Johan Zandstra en Debbie Smith
  *
  */
 public class Simulator extends AbstractController
@@ -26,11 +26,11 @@ implements ActionListener
     	logicModel = new LogicModel(this);
     	setLayout(new GridLayout(0, 1));
     	
-    	eenButton = new JButton("1 step");
+    	eenButton = new JButton("One step");
         eenButton.addActionListener((ActionListener) this);
         add(eenButton);
          
-        honderdButton = new JButton("100 steps");
+        honderdButton = new JButton("Hundred steps");
         honderdButton.addActionListener((ActionListener) this);
         add(honderdButton);
         
@@ -69,17 +69,23 @@ implements ActionListener
 			ActionEvent e = getActionEvent();
 			String command = e.getActionCommand();
 		
-			if (command == "100 steps"){
+			if (command == "Hundred steps"){
 				logicModel.runSteps(100);
 			}
-			if (command == "1 step"){
+			if (command == "One step"){
 				logicModel.runSteps(1);
 			}
 			
 		}
     	};
     	performerThread.start();
-    }
+}
+    
+    
+    
+    
+    
+    
     
     /**
      * Starts the simulation/ Main

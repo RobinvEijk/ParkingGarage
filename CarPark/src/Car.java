@@ -1,7 +1,7 @@
 /**
  * Class for the cars inside the parkingarage
  * Contains the location of the car and for how long the will be staying
- * @author Robin
+ * @author Robin van Eijk, Johan Zandstra, Dirk de Haan en Debbie Smith
  *
  */
 public abstract class Car {

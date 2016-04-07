@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
  * Class SimulatorView
  * This class creates the display for the view of the parking garage
  * 
- * @author Robin
+ * @author Johan Zandstra, Dirk de Haan, Debbie Smith en Robin van Eijk
  */
 public class SimulatorView extends AbstractView 
 { 
