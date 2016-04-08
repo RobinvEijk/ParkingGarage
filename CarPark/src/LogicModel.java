@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -7,11 +8,14 @@ import java.util.Random;
  */
 public class LogicModel extends AbstractModel
 {
-	private CarQueue entranceCarQueue;
+	protected CarQueue entranceCarQueue;
     private CarQueue paymentCarQueue;
-    private CarQueue exitCarQueue;
+    protected CarQueue exitCarQueue;
     private SimulatorView simulatorView;
     private Simulator simulator;
+    private QueueCounterView queueCounterView;
+    protected ArrayList<Car> entranceList;
+    protected ArrayList<Car> exitList;
     
 	private int day = 0;
 	private int hour = 0;
@@ -37,7 +41,11 @@ public class LogicModel extends AbstractModel
 		entranceCarQueue = new CarQueue();
 	    paymentCarQueue = new CarQueue();
 	    exitCarQueue = new CarQueue();
-	    simulatorView = new SimulatorView(3, 6, 30, simulator);
+	    queueCounterView = new QueueCounterView(this);
+	    simulatorView = new SimulatorView(3, 6, 30, simulator, queueCounterView);
+	    entranceList = new ArrayList<Car>();
+	    exitList =  new ArrayList<Car>();
+	    
 	}
 	
 	/**
@@ -91,10 +99,16 @@ public class LogicModel extends AbstractModel
         	if (whichCar <= 85){
         		Car car = new AdHocCar();
         		entranceCarQueue.addCar(car);
+        		//adds car to list with cars in entrance queue
+        		entranceList.add(car);
+        		
+        		
         	}
         	else if (whichCar >= 85){
         		Car car = new PassHolderCar();
         		entranceCarQueue.addCar(car);
+        		//adds car to list with cars in entrance queue
+        		entranceList.add(car);
         	}
         
         }
@@ -111,6 +125,8 @@ public class LogicModel extends AbstractModel
                 simulatorView.setCarAt(freeLocation, car);
                 int stayMinutes = (int) (15 + random.nextFloat() * 10 * 60);
                 car.setMinutesLeft(stayMinutes);
+              //removes car from list with cars in entrance queue
+                entranceList.remove(car);
             }
         }
 
@@ -135,8 +151,11 @@ public class LogicModel extends AbstractModel
             car.setIsPaying(false);
             simulatorView.removeCarAt(car.getLocation());
             exitCarQueue.addCar(car);
+            //add car to list with cars in exit Queue.
+            exitList.add(car);
             }
-            
+           
+          
             
         }
 
@@ -149,19 +168,27 @@ public class LogicModel extends AbstractModel
             // TODO Handle payment.
             simulatorView.removeCarAt(car.getLocation());
             exitCarQueue.addCar(car);
+            //add car to list with cars in queue
+            exitList.add(car);
         }
 
         // Let cars leave.
         for (int i = 0; i < exitSpeed; i++) {
             Car car = exitCarQueue.removeCar();
+            //remove car from list with cars in queue.
+            exitList.remove(car);
             if (car == null) {
                 break;
             }
             // Bye!
         }
-
+        //update the queue counter view
+        queueCounterView.updateView();
+        
         // Update the car park view.
         simulatorView.updateView();
+        
+        
 
         // Pause.
         try {

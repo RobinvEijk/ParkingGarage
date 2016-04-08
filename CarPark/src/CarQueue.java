@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.util.ListIterator;
 import java.util.Queue;
 
 /**
@@ -8,6 +9,7 @@ import java.util.Queue;
  */
 public class CarQueue {
     private Queue<Car> queue = new LinkedList<>();
+    private int queueSize = 0;
 
     /**
      * Ads a car to the queue and returns if the car has been added
@@ -24,6 +26,17 @@ public class CarQueue {
      */
     public Car removeCar() {
         return queue.poll();
+    }
+    
+    public int getQueueSize(){
+    	if (queue.poll() == null){
+    		System.out.println("there is no car in line");
+    	}
+    	for (Car car : queue){
+    		queueSize++;
+    	}
+    	System.out.println(queueSize);
+    	return queueSize;
     }
 
 }
