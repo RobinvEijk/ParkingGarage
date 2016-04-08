@@ -72,6 +72,9 @@ public class LogicModel extends AbstractModel
         }
 
         Random random = new Random();
+        Random rand = new Random();
+
+        int  whichCar = rand.nextInt(100) + 1;
 
         // Get the average number of cars that arrive per hour.
         int averageNumberOfCarsPerHour = day < 5
@@ -85,8 +88,15 @@ public class LogicModel extends AbstractModel
 
         // Add the cars to the back of the queue.
         for (int i = 0; i < numberOfCarsPerMinute; i++) {
-            Car car = new AdHocCar();
-            entranceCarQueue.addCar(car);
+        	if (whichCar <= 85){
+        		Car car = new AdHocCar();
+        		entranceCarQueue.addCar(car);
+        	}
+        	else if (whichCar >= 85){
+        		Car car = new PassHolderCar();
+        		entranceCarQueue.addCar(car);
+        	}
+        
         }
 
         // Remove car from the front of the queue and assign to a parking space.
@@ -112,6 +122,8 @@ public class LogicModel extends AbstractModel
             Car car = simulatorView.getFirstLeavingCar();
             if (car == null) {
                 break;
+
+            //payment for normal cars    
             }
             if (car.getClass().equals(AdHocCar.class)){
             car.setIsPaying(true);

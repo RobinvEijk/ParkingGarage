@@ -263,8 +263,18 @@ public class SimulatorView extends AbstractView
                     for(int place = 0; place < getNumberOfPlaces(); place++) {
                         Location location = new Location(floor, row, place);
                         Car car = getCarAt(location);
-                        Color color = car == null ? Color.white : Color.red;
-                        drawPlace(graphics, location, color);
+                        if (car == null){
+                        	Color color = Color.white;
+                        	drawPlace(graphics, location, color);
+                        }
+                        if (car != null && car.getClass().equals(AdHocCar.class)){
+                        	Color color2 = Color.red;
+                        	drawPlace(graphics, location, color2);
+                        }
+                        if (car != null && car.getClass().equals(PassHolderCar.class)){
+                        	Color color2 = Color.green;
+                        	drawPlace(graphics, location, color2);
+                        }
                     }
                 }
             }
