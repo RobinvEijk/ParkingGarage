@@ -42,7 +42,7 @@ public class TypeOfCarView extends JPanel{
 	/**
 	 * Updates the values of the amounts of types of cars inside the garage
 	 */
-	public void updateValues(){
+	public void updateView(){
 		adHocNum = logicModel.getAdHocAmount();
 		adHoc.setText("Number of adhoc cars inside garage:" + adHocNum );
 		passHolderNum = logicModel.getPHAmount();

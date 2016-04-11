@@ -16,6 +16,7 @@ public class LogicModel extends AbstractModel
     private Simulator simulator;
     private QueueCounterView queueCounterView;
     private TypeOfCarView typeOfCarView;
+    private TextOverview textOverview;
     protected LinkedList<Car> entranceList;
     protected LinkedList<Car> exitList;
     
@@ -43,9 +44,10 @@ public class LogicModel extends AbstractModel
 		entranceCarQueue = new CarQueue();
 	    paymentCarQueue = new CarQueue();
 	    exitCarQueue = new CarQueue();
+	    textOverview = new TextOverview();
 	    typeOfCarView = new TypeOfCarView(this);
 	    queueCounterView = new QueueCounterView(this);
-	    simulatorView = new SimulatorView(3, 6, 30, simulator, queueCounterView, typeOfCarView);
+	    simulatorView = new SimulatorView(3, 6, 30, simulator, queueCounterView, typeOfCarView, textOverview);
 	    entranceList = new LinkedList<Car>();
 	    exitList =  new LinkedList<Car>();
 	    
@@ -206,10 +208,10 @@ public class LogicModel extends AbstractModel
             // Bye!
         }
         
-        typeOfCarView.updateValues();
+        //update the typeOfCar view
+        typeOfCarView.updateView();
         //update the queue counter view
         queueCounterView.updateView();
-        
         // Update the car park view.
         simulatorView.updateView();
         
