@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
@@ -7,6 +8,7 @@ import java.awt.Rectangle;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -29,12 +31,24 @@ public class TypeOfCarView extends JPanel{
 	public TypeOfCarView(LogicModel logicModel) {
 		this.logicModel = logicModel;
 		this.setLayout(new GridLayout(0,1));
-		adHoc = new JTextField("Number of adhoc cars inside garage:" + adHocNum );
+		
+		JPanel panel1 = new JPanel();
+		panel1.setLayout(new FlowLayout());
+		JLabel adHocN = new JLabel("Number of adhoc cars inside garage: ");
+		adHoc = new JTextField(" "+ adHocNum, 10);
 		adHoc.setEditable(false);
-		this.add(adHoc);
-		passHolder = new JTextField("Number of passholder cars inside garage:" + passHolderNum );
+		panel1.add(adHocN);
+		panel1.add(adHoc);
+		this.add(panel1);
+		
+		JPanel panel2 = new JPanel();
+		panel2.setLayout(new FlowLayout());
+		JLabel pHN = new JLabel("Number of passholder cars inside garage: ");
+		passHolder = new JTextField("" + passHolderNum, 10 );
 		passHolder.setEditable(false);
-		this.add(passHolder);
+		panel2.add(pHN);
+		panel2.add(passHolder);
+		this.add(panel2);
 		this.setVisible(true);
 		
 	}
@@ -44,9 +58,9 @@ public class TypeOfCarView extends JPanel{
 	 */
 	public void updateView(){
 		adHocNum = logicModel.getAdHocAmount();
-		adHoc.setText("Number of adhoc cars inside garage:" + adHocNum );
+		adHoc.setText("" + adHocNum);
 		passHolderNum = logicModel.getPHAmount();
-		passHolder.setText("Number of passholder cars inside garage:" + passHolderNum );
+		passHolder.setText("" + passHolderNum );
 		
 		
 	}

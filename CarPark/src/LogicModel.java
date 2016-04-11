@@ -19,6 +19,7 @@ public class LogicModel extends AbstractModel
     private TextOverview textOverview;
     protected LinkedList<Car> entranceList;
     protected LinkedList<Car> exitList;
+    private int amountPayedCars;
     
 	private int day = 0;
 	private int hour = 0;
@@ -44,7 +45,7 @@ public class LogicModel extends AbstractModel
 		entranceCarQueue = new CarQueue();
 	    paymentCarQueue = new CarQueue();
 	    exitCarQueue = new CarQueue();
-	    textOverview = new TextOverview();
+	    textOverview = new TextOverview(this);
 	    typeOfCarView = new TypeOfCarView(this);
 	    queueCounterView = new QueueCounterView(this);
 	    simulatorView = new SimulatorView(3, 6, 30, simulator, queueCounterView, typeOfCarView, textOverview);
@@ -80,7 +81,14 @@ public class LogicModel extends AbstractModel
     	return amount;
     }
     
-  
+  /**
+   * returns the amount of cars which have payed at the payment machine
+   * @return amountPayedCars
+   */
+    public int getPayedCars(){
+    	return amountPayedCars;
+    }
+    
 	/**
 	 * Forwards the simulation by one step/minute
 	 */
@@ -186,6 +194,10 @@ public class LogicModel extends AbstractModel
         // Let cars pay.
         for (int i = 0; i < paymentSpeed; i++) {
             Car car = paymentCarQueue.removeCar();
+            if (car != null){
+            	amountPayedCars++;
+            	
+            }
             if (car == null) {
                 break;
             }
@@ -208,6 +220,8 @@ public class LogicModel extends AbstractModel
             // Bye!
         }
         
+        //update the textoverview
+        textOverview.updateView();
         //update the typeOfCar view
         typeOfCarView.updateView();
         //update the queue counter view

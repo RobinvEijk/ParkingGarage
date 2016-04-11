@@ -46,9 +46,10 @@ public class SimulatorView extends AbstractView
         
         //add a panel which contains the textviews 
         JPanel onderPaneel = new JPanel();
-        onderPaneel.setLayout(new GridLayout(0, 2));
-        onderPaneel.add(typeOfCarView, BorderLayout.EAST);
-        onderPaneel.add(queueCounterView, BorderLayout.WEST);
+        onderPaneel.setLayout(new FlowLayout());
+        onderPaneel.add(typeOfCarView);
+        onderPaneel.add(queueCounterView);
+        onderPaneel.add(textOverview);
        
         //Creates the contentpanel which contains al the views. 
         Container contentPane = getContentPane();
@@ -56,7 +57,7 @@ public class SimulatorView extends AbstractView
         contentPane.add(carParkView, BorderLayout.CENTER);
         contentPane.add(simulator, BorderLayout.WEST);
         contentPane.add(onderPaneel, BorderLayout.NORTH);
-        contentPane.add(textOverview, BorderLayout.EAST);
+        //contentPane.add(textOverview, BorderLayout.EAST);
         pack();
         updateView();
         setVisible(true);

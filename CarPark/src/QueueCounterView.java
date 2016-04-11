@@ -1,6 +1,8 @@
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -26,13 +28,24 @@ public class QueueCounterView extends JPanel{
 		exitNum = 0;
 		
 		this.setLayout(new GridLayout(0, 1));
-		entranceText = new JTextField("Number of cars in entrance queue: 0");
+		
+		JPanel panel1 = new JPanel();
+		panel1.setLayout(new FlowLayout());
+		JLabel entranceTextL = new JLabel("Number of cars in entrance queue: ");
+		entranceText = new JTextField("" + entranceNum, 10);
 		entranceText.setEditable(false);
-		add(entranceText);
-		exitText = new JTextField("Number of cars in exit queue: 0");
+		panel1.add(entranceTextL);
+		panel1.add(entranceText);
+		add(panel1);
+		
+		JPanel panel2 = new JPanel();
+		panel2.setLayout(new FlowLayout());
+		JLabel exitTextL = new JLabel("Number of cars in exit queue: ");
+		exitText = new JTextField("" + exitNum, 10);
 		exitText.setEditable(false);
-		add(exitText);
-		repaint();
+		panel2.add(exitTextL);
+		panel2.add(exitText);
+		add(panel2);
 		setVisible(true);
 	}
 	
@@ -41,9 +54,9 @@ public class QueueCounterView extends JPanel{
 	 */
 	public void updateView(){
 		entranceNum = logicModel.entranceList.size();
-		entranceText.setText("Number of cars in entrance queue: " + entranceNum);
+		entranceText.setText("" + entranceNum);
 		exitNum = logicModel.exitList.size();
-		exitText.setText("Number of cars in exit queue: " + exitNum);
+		exitText.setText("" + exitNum);
 		repaint();
 		}
 		
