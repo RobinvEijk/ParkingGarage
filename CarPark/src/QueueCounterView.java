@@ -32,6 +32,7 @@ public class QueueCounterView extends JPanel{
 		exitText = new JTextField("Number of cars in exit queue: 0");
 		exitText.setEditable(false);
 		add(exitText);
+		repaint();
 		setVisible(true);
 	}
 	
@@ -43,11 +44,11 @@ public class QueueCounterView extends JPanel{
 		entranceText.setText("Number of cars in entrance queue: " + entranceNum);
 		exitNum = logicModel.exitList.size();
 		exitText.setText("Number of cars in exit queue: " + exitNum);
+		repaint();
 		}
 		
 		
 		
 		
 	}
-	
-	
+		

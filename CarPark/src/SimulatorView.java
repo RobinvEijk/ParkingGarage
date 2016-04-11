@@ -23,6 +23,7 @@ public class SimulatorView extends AbstractView
     
     
     
+    
     /**
      * Creates an instance of SimulatorView
      * @param numberOfFloors
@@ -30,26 +31,28 @@ public class SimulatorView extends AbstractView
      * @param numberOfPlaces
      * @param simulator
      */
-    public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces, Simulator simulator, QueueCounterView test,
+    public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces, Simulator simulator, QueueCounterView qCView,
     		TypeOfCarView tOCView) {
     	this.numberOfFloors = numberOfFloors;
         this.numberOfRows = numberOfRows;
         this.numberOfPlaces = numberOfPlaces;
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         carParkView = new CarParkView();
-        queueCounterView = test;
-        this.typeOfCarView = tOCView;
+        queueCounterView = qCView;
+        typeOfCarView = tOCView;
         
-        
-        
+        //add a panel which contains the textviews 
+        JPanel onderPaneel = new JPanel();
+        onderPaneel.setLayout(new GridLayout(0, 2));
+        onderPaneel.add(typeOfCarView, BorderLayout.EAST);
+        onderPaneel.add(queueCounterView, BorderLayout.WEST);
        
         //Creates the contentpanel which contains al the views. 
         Container contentPane = getContentPane();
         
         contentPane.add(carParkView, BorderLayout.CENTER);
         contentPane.add(simulator, BorderLayout.WEST);
-        contentPane.add(typeOfCarView, BorderLayout.SOUTH);
-        contentPane.add(queueCounterView, BorderLayout.SOUTH);
+        contentPane.add(onderPaneel, BorderLayout.NORTH);
         //contentPane.add(stepLabel, BorderLayout.NORTH);
         pack();
         updateView();
@@ -64,6 +67,24 @@ public class SimulatorView extends AbstractView
     public void updateView() {
         carParkView.updateView();
         
+        
+    }
+    
+    /**
+     * calls the getAdHocAmount method in carParkView
+     * @return amount
+     */
+    public int getAdHocAmount(){
+    	int amount = carParkView.getAdHocAmount();
+    	return amount;
+    }
+    /**
+     * calls the getPHAmount method in carParkView
+     * @return amount 
+     */
+    public int getPHAmount(){
+    	int amount = carParkView.getPHAmount();
+    	return amount;
     }
     
     public void setController(){
@@ -221,7 +242,9 @@ public class SimulatorView extends AbstractView
     private class CarParkView extends JPanel {
         
         private Dimension size;
-        private Image carParkImage;    
+        private Image carParkImage;
+        private int adHocCar = 0;
+        private int PHCar = 0;
     
         /**
          * Constructor for objects of class CarPark
@@ -233,6 +256,22 @@ public class SimulatorView extends AbstractView
         /**
          * Overridden. Tell the GUI manager how big we would like to be.
          */
+        
+        /**
+         * returns the amount of adHocCars inside the Garage
+         * @return adHocCar
+         */
+        public int getAdHocAmount(){
+        	return adHocCar;
+        }
+        /**
+         * returns the amount of PassholderCars inside the garage
+         * @return PHCar
+         */
+        public int getPHAmount(){
+        	return PHCar;
+        }
+        
         public Dimension getPreferredSize() {
             return new Dimension(800, 500);
         }
@@ -260,6 +299,8 @@ public class SimulatorView extends AbstractView
          * Updates the view of the parking garage to the current state of the garage
          */
         public void updateView() {
+        	adHocCar = 0;
+        	PHCar = 0;
             // Create a new car park image if the size has changed.
             if (!size.equals(getSize())) {
                 size = getSize();
@@ -278,10 +319,12 @@ public class SimulatorView extends AbstractView
                         if (car != null && car.getClass().equals(AdHocCar.class)){
                         	Color color2 = Color.red;
                         	drawPlace(graphics, location, color2);
+                        	adHocCar++;
                         }
                         if (car != null && car.getClass().equals(PassHolderCar.class)){
                         	Color color2 = Color.green;
                         	drawPlace(graphics, location, color2);
+                        	PHCar++;
                         }
                     }
                 }

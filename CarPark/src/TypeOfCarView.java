@@ -1,58 +1,53 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridLayout;
 import java.awt.Rectangle;
 
 import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  * Creates a view of the type's of cars inside the parking garage
- * @author Robin
+ * @author Robin van Eijk, Dirk de Haan
  *
  */
-public class TypeOfCarView extends JComponent{
-	Slice[] slices = { new Slice(5, Color.black), 
-			new Slice(33, Color.green),
-			new Slice(20, Color.yellow), new Slice(15, Color.red) };
-		   
+public class TypeOfCarView extends JPanel{
+	private int adHocNum;
+	private int passHolderNum;
+	private LogicModel logicModel;
+	private JTextField adHoc;
+	private JTextField passHolder;
+	
+	
 		   /**
 		    * Constructor for the pie view
 		    */
-	TypeOfCarView() {}
-			
-	public void paint(Graphics g) {
-		drawPie((Graphics2D) g, getBounds(), slices);
-	}
-		   
-	void drawPie(Graphics2D g, Rectangle area, Slice[] slices) {	
-		double total = 0.0D;
-		for (int i = 0; i < slices.length; i++) {
-				total += slices[i].value;
-				}
-		double curValue = 0.0D;
-		int startAngle = 0;
-		for (int i = 0; i < slices.length; i++) {
-			startAngle = (int) (curValue * 360 / total);
-			int arcAngle = (int) (slices[i].value * 360 / total);
-			g.setColor(slices[i].color);
-			g.fillArc(area.x, area.y, area.width, area.height, 
-					startAngle, arcAngle);
-			curValue += slices[i].value;
-			}
-		}
+	public TypeOfCarView(LogicModel logicModel) {
+		this.logicModel = logicModel;
+		this.setLayout(new GridLayout(0,1));
+		adHoc = new JTextField("Number of adhoc cars inside garage:" + adHocNum );
+		adHoc.setEditable(false);
+		this.add(adHoc);
+		passHolder = new JTextField("Number of passholder cars inside garage:" + passHolderNum );
+		passHolder.setEditable(false);
+		this.add(passHolder);
+		this.setVisible(true);
 		
-
-	
-
-
-
-class Slice {
-	   double value;
-	   Color color;
-	   public Slice(double value, Color color) {  
-	      this.value = value;
-	      this.color = color;
-	   }
-	
+	}
+			
+	/**
+	 * Updates the values of the amounts of types of cars inside the garage
+	 */
+	public void updateValues(){
+		adHocNum = logicModel.getAdHocAmount();
+		adHoc.setText("Number of adhoc cars inside garage:" + adHocNum );
+		passHolderNum = logicModel.getPHAmount();
+		passHolder.setText("Number of passholder cars inside garage:" + passHolderNum );
+		
+		
 	}
 }
