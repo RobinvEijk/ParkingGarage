@@ -1,10 +1,12 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javax.swing.JFrame;
+import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -33,30 +35,39 @@ public class TextOverview extends JPanel {
 		
 		JPanel datum = new JPanel();
 		datum.setLayout(new FlowLayout());
+		datum.setBackground(Color.LIGHT_GRAY);
 		JLabel lblDate = new JLabel("Date");
 		txtDate = new JTextField();
 		txtDate.setEditable(false);
 		txtDate.setColumns(10);
+		txtDate.setBackground(Color.LIGHT_GRAY);
+		txtDate.setBorder(BorderFactory.createLineBorder(Color.GRAY,1));
 		datum.add(lblDate);
 		datum.add(txtDate);
 		this.add(datum);
 		
 		JPanel revenue = new JPanel();
 		revenue.setLayout(new FlowLayout());
+		revenue.setBackground(Color.LIGHT_GRAY);
 		JLabel lblRevenue = new JLabel("Total revenue");
 		txtRevenue = new JTextField();
 		txtRevenue.setEditable(false);
 		txtRevenue.setColumns(10);
+		txtRevenue.setBackground(Color.LIGHT_GRAY);
+		txtRevenue.setBorder(BorderFactory.createLineBorder(Color.GRAY,1));
 		revenue.add(lblRevenue);
 		revenue.add(txtRevenue);
 		this.add(revenue);
 		
 		JPanel expectedRevenue = new JPanel();
 		expectedRevenue.setLayout(new FlowLayout());
+		expectedRevenue.setBackground(Color.LIGHT_GRAY);
 		JLabel expRevL = new JLabel("Expected Revenue");
 		txtExpRevenue = new JTextField();
 		txtExpRevenue.setEditable(false);
 		txtExpRevenue.setColumns(10);
+		txtExpRevenue.setBackground(Color.LIGHT_GRAY);
+		txtExpRevenue.setBorder(BorderFactory.createLineBorder(Color.GRAY,1));
 		expectedRevenue.add(expRevL);
 		expectedRevenue.add(txtExpRevenue);
 		this.add(expectedRevenue);

@@ -1,6 +1,8 @@
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -31,18 +33,24 @@ public class QueueCounterView extends JPanel{
 		
 		JPanel panel1 = new JPanel();
 		panel1.setLayout(new FlowLayout());
+		panel1.setBackground(Color.LIGHT_GRAY);
 		JLabel entranceTextL = new JLabel("Number of cars in entrance queue: ");
 		entranceText = new JTextField("" + entranceNum, 10);
 		entranceText.setEditable(false);
+		entranceText.setBackground(Color.LIGHT_GRAY);
+		entranceText.setBorder(BorderFactory.createLineBorder(Color.GRAY,1));
 		panel1.add(entranceTextL);
 		panel1.add(entranceText);
 		add(panel1);
 		
 		JPanel panel2 = new JPanel();
 		panel2.setLayout(new FlowLayout());
+		panel2.setBackground(Color.LIGHT_GRAY);
 		JLabel exitTextL = new JLabel("Number of cars in exit queue: ");
 		exitText = new JTextField("" + exitNum, 10);
 		exitText.setEditable(false);
+		exitText.setBackground(Color.LIGHT_GRAY);
+		exitText.setBorder(BorderFactory.createLineBorder(Color.GRAY,1));
 		panel2.add(exitTextL);
 		panel2.add(exitText);
 		add(panel2);

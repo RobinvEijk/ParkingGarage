@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
 
+import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -32,20 +33,27 @@ public class TypeOfCarView extends JPanel{
 		this.logicModel = logicModel;
 		this.setLayout(new GridLayout(0,1));
 		
+		
 		JPanel panel1 = new JPanel();
 		panel1.setLayout(new FlowLayout());
+		panel1.setBackground(Color.LIGHT_GRAY);
 		JLabel adHocN = new JLabel("Number of adhoc cars inside garage: ");
 		adHoc = new JTextField(" "+ adHocNum, 10);
 		adHoc.setEditable(false);
+		adHoc.setBackground(Color.LIGHT_GRAY);
+		adHoc.setBorder(BorderFactory.createLineBorder(Color.GRAY,1));
 		panel1.add(adHocN);
 		panel1.add(adHoc);
 		this.add(panel1);
 		
 		JPanel panel2 = new JPanel();
 		panel2.setLayout(new FlowLayout());
+		panel2.setBackground(Color.LIGHT_GRAY);
 		JLabel pHN = new JLabel("Number of passholder cars inside garage: ");
 		passHolder = new JTextField("" + passHolderNum, 10 );
 		passHolder.setEditable(false);
+		passHolder.setBackground(Color.LIGHT_GRAY);
+		passHolder.setBorder(BorderFactory.createLineBorder(Color.GRAY,1));
 		panel2.add(pHN);
 		panel2.add(passHolder);
 		this.add(panel2);

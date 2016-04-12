@@ -33,7 +33,7 @@ public class SimulatorView extends AbstractView
      * @param simulator
      */
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces, Simulator simulator, QueueCounterView qCView,
-    		TypeOfCarView tOCView, TextOverview tOView) {
+    		TypeOfCarView tOCView, TextOverview tOView, CarLegendView cLView) {
     	this.numberOfFloors = numberOfFloors;
         this.numberOfRows = numberOfRows;
         this.numberOfPlaces = numberOfPlaces;
@@ -46,6 +46,7 @@ public class SimulatorView extends AbstractView
         
         //add a panel which contains the textviews 
         JPanel onderPaneel = new JPanel();
+        onderPaneel.setBackground(Color.LIGHT_GRAY);
         onderPaneel.setLayout(new FlowLayout());
         onderPaneel.add(typeOfCarView);
         onderPaneel.add(queueCounterView);
@@ -53,11 +54,11 @@ public class SimulatorView extends AbstractView
        
         //Creates the contentpanel which contains al the views. 
         Container contentPane = getContentPane();
-        
         contentPane.add(carParkView, BorderLayout.CENTER);
         contentPane.add(simulator, BorderLayout.WEST);
         contentPane.add(onderPaneel, BorderLayout.NORTH);
-        //contentPane.add(textOverview, BorderLayout.EAST);
+        contentPane.add(cLView, BorderLayout.SOUTH);
+        
         pack();
         updateView();
         setVisible(true);
@@ -277,7 +278,7 @@ public class SimulatorView extends AbstractView
         }
         
         public Dimension getPreferredSize() {
-            return new Dimension(800, 500);
+            return new Dimension(1000, 500);
         }
     
         /**

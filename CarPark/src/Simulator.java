@@ -1,7 +1,9 @@
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
 /**
@@ -17,6 +19,7 @@ implements ActionListener
 	private ActionEvent event; 
 	private JButton eenButton;
     private JButton honderdButton;
+    private JButton duizendButton;
 	
     /**
      * Constructs an instance of the Simulator Controller
@@ -24,16 +27,24 @@ implements ActionListener
      */
     public Simulator(){
     	logicModel = new LogicModel(this);
-    	setLayout(new GridLayout(0, 1));
+    	setLayout(new GridLayout(0, 1, 0, 5));
+    	setBackground(Color.LIGHT_GRAY);
+    	setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY,8));
     	
     	eenButton = new JButton("One step");
         eenButton.addActionListener((ActionListener) this);
+        eenButton.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
         add(eenButton);
          
         honderdButton = new JButton("Hundred steps");
         honderdButton.addActionListener((ActionListener) this);
+        honderdButton.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
         add(honderdButton);
         
+        duizendButton = new JButton("Thousand steps");
+        duizendButton.addActionListener((ActionListener) this);
+        duizendButton.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
+        add(duizendButton);
         setVisible(true);
     }
     
@@ -74,6 +85,9 @@ implements ActionListener
 			}
 			if (command == "One step"){
 				logicModel.runSteps(1);
+			}
+			if (command == "Thousand steps"){
+				logicModel.runSteps(1000);
 			}
 			
 		}
