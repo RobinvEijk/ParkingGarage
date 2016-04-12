@@ -19,7 +19,10 @@ public class SimulatorView extends AbstractView
     private QueueCounterView queueCounterView;
     private TypeOfCarView typeOfCarView;
     private TextOverview textOverview;
-    
+    private Sound sound;
+    private WarningMessage warningMessage;
+    private boolean test1 = true;
+    private boolean test2 = true;
     
     
     
@@ -33,7 +36,7 @@ public class SimulatorView extends AbstractView
      * @param simulator
      */
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces, Simulator simulator, QueueCounterView qCView,
-    		TypeOfCarView tOCView, TextOverview tOView, CarLegendView cLView) {
+    		TypeOfCarView tOCView, TextOverview tOView, CarLegendView cLView, Sound sound) {
     	this.numberOfFloors = numberOfFloors;
         this.numberOfRows = numberOfRows;
         this.numberOfPlaces = numberOfPlaces;
@@ -42,6 +45,8 @@ public class SimulatorView extends AbstractView
         queueCounterView = qCView;
         typeOfCarView = tOCView;
         textOverview = tOView;
+        this.sound = sound;
+        this.warningMessage = warningMessage;
         
         
         //add a panel which contains the textviews 
@@ -73,6 +78,27 @@ public class SimulatorView extends AbstractView
         carParkView.updateView();
         
         
+    
+    }
+    
+   	Thread t = new Thread();
+   	public void run(){
+   		errorMessage();
+   	}
+   	
+   	
+   	/**
+   	 * plays a sound
+   	 */
+   	public void playMusic(){
+     		sound.play("C:/Users/Robin/git/CarPark/src/eagle.wav");
+   		}
+   	
+    /**
+     * displays a errorMessage
+     */
+   	public void errorMessage(){
+    	WarningMessage.infoBox("Er staan nu 50 adhoc autos geparkeerd", "Waarschuwing");
     }
     
     /**
@@ -81,6 +107,14 @@ public class SimulatorView extends AbstractView
      */
     public int getAdHocAmount(){
     	int amount = carParkView.getAdHocAmount();
+    	if (amount == 50 && test1 == true){
+    		errorMessage();
+    		test1 = false;
+    	}
+    	if (amount == 100 && test2 == true){
+    		playMusic();
+    		test2 = false;
+    	}
     	return amount;
     }
     /**

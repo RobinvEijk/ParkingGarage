@@ -87,11 +87,5 @@ public class Sound implements LineListener {
  
     }
  
-    public static void main(String[] args) {
-       // String audioFilePath = "E:/Test/Audio.wav";
-    	String audioFilePath = "C:\Users\Robin\git\CarPark\src\eagle.wav";
-        Sound player = new Sound();
-        player.play(audioFilePath);
-    }
  
 }
