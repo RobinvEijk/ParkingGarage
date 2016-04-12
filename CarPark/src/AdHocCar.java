@@ -11,4 +11,8 @@ public class AdHocCar extends Car {
     public AdHocCar() {
 
     }
+    public int getArrivalTime(){
+		return 0;
+	}
 }
+

@@ -36,8 +36,33 @@ public class CarLegendView extends JPanel {
 		JLabel passHT = new JLabel("Passholder car");
 		passH.add(passHT);
 		
+		JPanel reservationCar = new JPanel();
+		reservationCar.setLayout(new FlowLayout());
+		reservationCar.setBackground(Color.LIGHT_GRAY);
+		JTextField reservCC = new JTextField("", 3);
+		reservCC.setEditable(false);
+		reservCC.setBackground(Color.BLUE);
+		reservCC.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
+		reservationCar.add(reservCC);
+		JLabel reservCT = new JLabel("Reservation car");
+		reservationCar.add(reservCT);
+		
+		JPanel reservationSpot = new JPanel();
+		reservationSpot.setLayout(new FlowLayout());
+		reservationSpot.setBackground(Color.LIGHT_GRAY);
+		JTextField reservSC = new JTextField("", 3);
+		reservSC.setEditable(false);
+		reservSC.setBackground(Color.YELLOW);
+		reservSC.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
+		reservationSpot.add(reservSC);
+		JLabel reservST = new JLabel("Reserved Spot");
+		reservationSpot.add(reservST);
+		
+		
 		this.add(adHoc);
 		this.add(passH);
+		this.add(reservationCar);
+		this.add(reservationSpot);
 		this.setVisible(true);
 	}
 	

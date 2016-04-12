@@ -112,7 +112,8 @@ public class LogicModel extends AbstractModel
         Random rand = new Random();
 
         int  whichCar = rand.nextInt(100) + 1;
-
+        int arrivalTime = ( 20 + rand.nextInt(120));
+        
         // Get the average number of cars that arrive per hour.
         int averageNumberOfCarsPerHour = day < 5
                 ? weekDayArrivals
@@ -126,18 +127,24 @@ public class LogicModel extends AbstractModel
         
         // Add the cars to the back of the queue.
         for (int i = 0; i < numberOfCarsPerMinute; i++) {
-        	if (whichCar <= 85){
+        	//adds a new AdhocCar
+        	if (whichCar <= 80){
         		Car car = new AdHocCar();
         		entranceCarQueue.addCar(car);
         		//adds car to list with cars in entrance queue
         		entranceList.add(car);
-        		
-        		
         	}
-        	else if (whichCar >= 85){
+        	//adds a new PassHolderCar
+        	else if (whichCar >= 80 && whichCar <= 90){
         		Car car = new PassHolderCar();
         		entranceCarQueue.addCar(car);
         		//adds car to list with cars in entrance queue
+        		entranceList.add(car);
+        	}
+        	//adds a new Reservationcar
+        	else if (whichCar >= 90){
+        		Car car = new ReservationCar(arrivalTime);
+        		entranceCarQueue.addCar(car);
         		entranceList.add(car);
         	}
         
@@ -156,9 +163,15 @@ public class LogicModel extends AbstractModel
             Location freeLocation = simulatorView.getFirstFreeLocation();
             if (freeLocation != null) {
                 simulatorView.setCarAt(freeLocation, car);
-                int stayMinutes = (int) (15 + random.nextFloat() * 10 * 60);
-                car.setMinutesLeft(stayMinutes);
-              //removes car from list with cars in entrance queue
+                if (car.getClass().equals(PassHolderCar.class) || car.getClass().equals(AdHocCar.class)){
+                	int stayMinutes = (int) (15 + random.nextFloat() * 10 * 60);
+                	car.setMinutesLeft(stayMinutes);}
+                
+                else if (car.getClass().equals(ReservationCar.class)){
+                	int stayMinutes = (int) (15 + random.nextFloat() * 10 * 60); 
+                	int totalMinutes = stayMinutes + arrivalTime;
+                	car.setMinutesLeft(totalMinutes);
+                }
                 
             }
         }
@@ -180,7 +193,7 @@ public class LogicModel extends AbstractModel
             }
             
             //New payment method for pass holders, they dont pay. they just drive out. 
-            else if (car.getClass().equals(PassHolderCar.class)){
+            else if (car.getClass().equals(PassHolderCar.class) || car.getClass().equals(ReservationCar.class)){
             car.setIsPaying(false);
             simulatorView.removeCarAt(car.getLocation());
             exitCarQueue.addCar(car);

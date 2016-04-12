@@ -70,6 +70,15 @@ public abstract class Car {
      */
     public void tick() {
         minutesLeft--;
+        removeArrivalTime();
     }
+    
+    /**
+     * does nothing, ReservationCar implements this method.
+     */
+    public void removeArrivalTime(){}
+    
+    
+    public abstract int getArrivalTime();
 
 }

@@ -317,19 +317,35 @@ public class SimulatorView extends AbstractView
                     for(int place = 0; place < getNumberOfPlaces(); place++) {
                         Location location = new Location(floor, row, place);
                         Car car = getCarAt(location);
+                        //gives the parking spot a white color if there is no car parked.
                         if (car == null){
                         	Color color = Color.white;
                         	drawPlace(graphics, location, color);
                         }
-                        if (car != null && car.getClass().equals(AdHocCar.class)){
+                        //gives the parking spot a red color if there is a AdHocCar parked.
+                        else if (car != null && car.getClass().equals(AdHocCar.class)){
                         	Color color2 = Color.red;
                         	drawPlace(graphics, location, color2);
                         	adHocCar++;
                         }
-                        if (car != null && car.getClass().equals(PassHolderCar.class)){
+                        //gives the parking spot a green color if a PassholderCar is parked.
+                        else if (car != null && car.getClass().equals(PassHolderCar.class)){
                         	Color color2 = Color.green;
                         	drawPlace(graphics, location, color2);
                         	PHCar++;
+                        }
+                        //gives the parking spot a blue color if a ReservationCar is. 
+                        //or a yellow color if it has been reserved but the car has not yet arrived
+                        else if (car != null && car.getClass().equals(ReservationCar.class)){
+                        	if (car.getArrivalTime() == 0){
+                        		Color color3 = Color.blue;
+                        		drawPlace(graphics, location, color3);
+                        		}
+                        	else if (car.getArrivalTime() != 0){
+                        		Color color3 = Color.yellow;
+                        		drawPlace(graphics, location, color3);
+                        	}
+                        
                         }
                     }
                 }

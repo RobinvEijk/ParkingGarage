@@ -11,4 +11,10 @@ public class PassHolderCar extends Car{
 	public PassHolderCar(){
 	
 	}
+	
+	public int getArrivalTime(){
+		return 0;
+	}
+	
+	
 }
