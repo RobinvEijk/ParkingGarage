@@ -75,10 +75,26 @@ public class LogicModel extends AbstractModel
     }
     /**
      * calls the getPHAmount method inside SimulatorView
-     * @return
+     * @return amount
      */
     public int getPHAmount(){
     	int amount = simulatorView.getPHAmount();
+    	return amount;
+    }
+    /**
+     * calls the getResAmount method inside SimulatorView
+     * @return amount
+     */
+    public int getResAmount(){
+    	int amount = simulatorView.getResAmount();
+    	return amount;
+    }
+    /**
+     * calls the getResSpotAmount method inside SimulatorView
+     * @return amount
+     */
+    public int getResSpotAmount(){
+    	int amount = simulatorView.getResSpotAmount();
     	return amount;
     }
     
@@ -187,13 +203,13 @@ public class LogicModel extends AbstractModel
 
             //payment for normal cars    
             }
-            if (car.getClass().equals(AdHocCar.class)){
+            if (car.getClass().equals(AdHocCar.class)|| car.getClass().equals(ReservationCar.class)){
             car.setIsPaying(true);
             paymentCarQueue.addCar(car);
             }
             
             //New payment method for pass holders, they dont pay. they just drive out. 
-            else if (car.getClass().equals(PassHolderCar.class) || car.getClass().equals(ReservationCar.class)){
+            else if (car.getClass().equals(PassHolderCar.class) ){
             car.setIsPaying(false);
             simulatorView.removeCarAt(car.getLocation());
             exitCarQueue.addCar(car);

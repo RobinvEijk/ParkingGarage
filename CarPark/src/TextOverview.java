@@ -108,7 +108,7 @@ public class TextOverview extends JPanel {
 	 */
 	public void calcExpRevenue(){
 		
-	int totalCarsLeft =  logicModel.getAdHocAmount();
+	int totalCarsLeft =  logicModel.getAdHocAmount()+logicModel.getResAmount();
 	
 	double totalExpRevenue = totalCarsLeft * ticketPrice;
 	

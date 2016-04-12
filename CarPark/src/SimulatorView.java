@@ -91,6 +91,22 @@ public class SimulatorView extends AbstractView
     	int amount = carParkView.getPHAmount();
     	return amount;
     }
+    /**
+     * calls the getResAmount method in carParkView
+     * @return
+     */
+    public int getResAmount(){
+    	int amount = carParkView.getResAmount();
+    	return amount;
+    }
+    /**
+     * calls the getResSpotAmount method in carParkView
+     * @return
+     */
+    public int getResSpotAmount(){
+    	int amount = carParkView.getResSpotAmount();
+    	return amount;
+    }
     
     public void setController(){
     	
@@ -248,8 +264,10 @@ public class SimulatorView extends AbstractView
         
         private Dimension size;
         private Image carParkImage;
-        private int adHocCar = 0;
+        private int adHocCar= 0;
         private int PHCar = 0;
+        private int reservedCar = 0;
+        private int reservedSpot = 0;
     
         /**
          * Constructor for objects of class CarPark
@@ -275,6 +293,20 @@ public class SimulatorView extends AbstractView
          */
         public int getPHAmount(){
         	return PHCar;
+        }
+        /**
+         * returns the amount of reservationCars inside the garage
+         * @return reservedCar
+         */
+        public int getResAmount(){
+        	return reservedCar;
+        }
+        /**
+         * returns the amount of reserved spots inside the garage
+         * @return reservedSpot
+         */
+        public int getResSpotAmount(){
+        	return reservedSpot;
         }
         
         public Dimension getPreferredSize() {
@@ -306,6 +338,8 @@ public class SimulatorView extends AbstractView
         public void updateView() {
         	adHocCar = 0;
         	PHCar = 0;
+        	reservedCar = 0;
+        	reservedSpot = 0;
             // Create a new car park image if the size has changed.
             if (!size.equals(getSize())) {
                 size = getSize();
@@ -340,10 +374,12 @@ public class SimulatorView extends AbstractView
                         	if (car.getArrivalTime() == 0){
                         		Color color3 = Color.blue;
                         		drawPlace(graphics, location, color3);
+                        		reservedCar++;
                         		}
                         	else if (car.getArrivalTime() != 0){
                         		Color color3 = Color.yellow;
                         		drawPlace(graphics, location, color3);
+                        		reservedSpot++;
                         	}
                         
                         }

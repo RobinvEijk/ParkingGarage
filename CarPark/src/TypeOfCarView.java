@@ -21,9 +21,13 @@ import javax.swing.JTextField;
 public class TypeOfCarView extends JPanel{
 	private int adHocNum;
 	private int passHolderNum;
+	private int reservationNum;
+	private int resSpotNum;
 	private LogicModel logicModel;
 	private JTextField adHoc;
 	private JTextField passHolder;
+	private JTextField reservation;
+	private JTextField reservationSpot;
 	
 	
 		   /**
@@ -57,8 +61,33 @@ public class TypeOfCarView extends JPanel{
 		panel2.add(pHN);
 		panel2.add(passHolder);
 		this.add(panel2);
-		this.setVisible(true);
 		
+		
+		JPanel panel3 = new JPanel();
+		panel3.setLayout(new FlowLayout());
+		panel3.setBackground(Color.LIGHT_GRAY);
+		JLabel resCN = new JLabel("Number of reservation cars inside garage: ");
+		reservation = new JTextField(" "+ reservationNum, 10);
+		reservation.setEditable(false);
+		reservation.setBackground(Color.LIGHT_GRAY);
+		reservation.setBorder(BorderFactory.createLineBorder(Color.GRAY,1));
+		panel3.add(resCN);
+		panel3.add(reservation);
+		this.add(panel3);
+		
+		JPanel panel4 = new JPanel();
+		panel4.setLayout(new FlowLayout());
+		panel4.setBackground(Color.LIGHT_GRAY);
+		JLabel resSN = new JLabel("Number of reserved spots inside garage: ");
+		reservationSpot = new JTextField(" "+ resSpotNum, 10);
+		reservationSpot.setEditable(false);
+		reservationSpot.setBackground(Color.LIGHT_GRAY);
+		reservationSpot.setBorder(BorderFactory.createLineBorder(Color.GRAY,1));
+		panel4.add(resSN);
+		panel4.add(reservationSpot);
+		this.add(panel4);
+		
+		this.setVisible(true);
 	}
 			
 	/**
@@ -69,6 +98,10 @@ public class TypeOfCarView extends JPanel{
 		adHoc.setText("" + adHocNum);
 		passHolderNum = logicModel.getPHAmount();
 		passHolder.setText("" + passHolderNum );
+		reservationNum = logicModel.getResAmount();
+		reservation.setText("" + reservationNum);
+		resSpotNum = logicModel.getResSpotAmount();
+		reservationSpot.setText(""+ resSpotNum);
 		
 		
 	}
