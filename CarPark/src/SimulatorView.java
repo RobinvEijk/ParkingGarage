@@ -91,7 +91,7 @@ public class SimulatorView extends AbstractView
    	 * plays a sound
    	 */
    	public void playMusic(){
-     		sound.play("C:/Users/Robin/git/CarPark/src/eagle.wav");
+     		sound.play("C:/Users/Robin/git/CarPark/src/mario1.wav");
    		}
    	
     /**
@@ -107,7 +107,7 @@ public class SimulatorView extends AbstractView
      */
     public int getAdHocAmount(){
     	int amount = carParkView.getAdHocAmount();
-    	if (amount == 50 && test1 == true){
+    	if (amount == 51 && test1 == true){
     		errorMessage();
     		test1 = false;
     	}
